@@ -2,6 +2,8 @@
 require "roda"
 
 class App < Roda
+  plugin :json
+
   route do |r|
     # GET / request
     r.root do
@@ -15,14 +17,14 @@ class App < Roda
 
       # GET /hello/world request
       r.get "world" do
-        "#{@greeting} world!"
+        { greeting: "#{@greeting} world!" }
       end
 
       # /hello request
       r.is do
         # GET /hello request
         r.get do
-          "#{@greeting}!"
+          { greeting: "#{@greeting}!" }
         end
 
         # POST /hello request
